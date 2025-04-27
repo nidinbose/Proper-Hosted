@@ -1,43 +1,50 @@
 import React, { useEffect, useState,useRef } from 'react'
 import axios from 'axios'
+import { useParams } from 'react-router-dom';
 import { MdOutlineMenuOpen } from "react-icons/md";
 import { HiViewList } from "react-icons/hi";
 
 
 const MultyStepEdit = () => {
-    // const {id}=useParams()
+    const {id}=useParams()
   const [form,setForm]=useState({})
   
-  const use="680e0eb39d35c5545b48ac52"
+ 
 
   const getUser=async ()=>{
-    const res=await axios.get(`http://localhost:3003/api/getCard/${use}`)
+    const res=await axios.get(`http://localhost:3003/api/getCard/${id}`)
      setForm(res.data)
      console.log(res.data);
-     
+     if (res.data.cardPhoto) {
+      setPreview(res.data.cardPhoto);
+    }
+    if (res.data.seoPhoto) {
+      setSeoPreview(res.data.seoPhoto); 
+    }
   }
 
   const update = async () => {
     try {
-      
-      const res = await axios.put(`http://localhost:3003/api/updateCard/${use}`,{form:form});
-        console.log(res);
+      const res = await axios.put(`http://localhost:3003/api/updateCard/${id}`, form); 
+  
+      console.log(res);
   
       if (res.status === 200) {
-            console.log("Card updated successfully:", res.data);
-            } else {
-             console.error("Unexpected response status:", res.status);
-             }
+        console.log("Card updated successfully:", res.data);
+      } else {
+        console.error("Unexpected response status:", res.status);
+      }
     } catch (error) {
-          if (error.response) {
-               console.error("API error:", error.response.data);
-              } else if (error.request) {
-               console.error("No response received:", error.request);
-              } else {
-                console.error("Request setup error:", error.message);
-             }
+      if (error.response) {
+        console.error("API error:", error.response.data);
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+      } else {
+        console.error("Request setup error:", error.message);
+      }
     }
   };
+  
   
   useEffect(()=>{
     getUser()
@@ -64,6 +71,7 @@ const MultyStepEdit = () => {
         try {
           const base64Photo = await convert(file);
           setPreview(base64Photo);
+          setForm((prev) => ({ ...prev, cardPhoto: base64Photo })); // also set in form
         } catch (error) {
           console.error("Error converting the file to base64", error);
         }
@@ -76,6 +84,7 @@ const MultyStepEdit = () => {
         try {
           const base64Photo = await convert(file);
           setSeoPreview(base64Photo);
+          setForm((prev) => ({ ...prev, seoPhoto: base64Photo }));
         } catch (error) {
           console.error("Error converting the file to base64", error);
         }
