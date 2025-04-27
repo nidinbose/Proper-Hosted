@@ -4,46 +4,44 @@ import { MdOutlineMenuOpen } from "react-icons/md";
 import { HiViewList } from "react-icons/hi";
 
 
-const MultyStep = () => {
-  const [form,setForm]=useState({
-cardName:"",
-joiningFee:"",
-annualFee:"",
-cardSlung:"",
-cardPhoto:"",
-cardType:"",
-categoryName:"",
-providerName:"",
-service:"",
-payout:"",
-commission:"",
-cardLink:"",
-cardStatus:"",
-rating:"",
-reviewHeading:"",
-ratingDescription:"",
-forignTransactionPlanning:"",
-annualPersentageRate:"",
-minCreditScore:"",
-maxCreditScore:"",
-minAge:"",
-maxAge:"",
-minMonthlyIncome:"",
-maxMonthlyIncome:"",
-loungeService:"",
-fraudLiability:"",
-features:"",
-welcomeOffers:"",
-publishedBy:"",
-publishedAt:"",
-payouts:"",
-seoPhoto:"",
-seoTitle:"",
-seoDescription:"",
-seoKeywords:"",
+const MultyStepEdit = () => {
+    // const {id}=useParams()
+  const [form,setForm]=useState({})
+  
+  const use="680e0eb39d35c5545b48ac52"
 
+  const getUser=async ()=>{
+    const res=await axios.get(`http://localhost:3003/api/getCard/${use}`)
+     setForm(res.data)
+     console.log(res.data);
+     
+  }
 
-  })
+  const update = async () => {
+    try {
+      
+      const res = await axios.put(`http://localhost:3003/api/updateCard/${use}`,{form:form});
+        console.log(res);
+  
+      if (res.status === 200) {
+            console.log("Card updated successfully:", res.data);
+            } else {
+             console.error("Unexpected response status:", res.status);
+             }
+    } catch (error) {
+          if (error.response) {
+               console.error("API error:", error.response.data);
+              } else if (error.request) {
+               console.error("No response received:", error.request);
+              } else {
+                console.error("Request setup error:", error.message);
+             }
+    }
+  };
+  
+  useEffect(()=>{
+    getUser()
+},[])
 
  
     const [currentStep,setCurrentStep]=useState(1)
@@ -99,68 +97,7 @@ seoKeywords:"",
     };
     
     
-    const add = async (e) => {
-      e.preventDefault();
-      try {
-        const formDataWithPhoto = { ...form, cardPhoto: preview, seoPhoto:seoPreview };
-        const response = await axios.post(`http://localhost:3003/api/addCard`, formDataWithPhoto);
-    
-        if (response.data.success) {
-          alert(' Successfully added card!');
-          setForm({
-            cardName: "",
-            joiningFee: "",
-            annualFee: "",
-            cardSlung: "",
-            cardPhoto:"",
-            cardType:"",
-            categoryName:"",
-providerName:"",
-service:"",
-payout:"",
-commission:"",
-cardLink:"",
-cardStatus:"",
-rating:"",
-reviewHeading:"",
-ratingDescription:"",
-forignTransactionPlanning:"",
-annualPersentageRate:"",
-minCreditScore:"",
-maxCreditScore:"",
-minAge:"",
-maxAge:"",
-minMonthlyIncome:"",
-maxMonthlyIncome:"",
-loungeService:"",
-fraudLiability:"",
-features:"",
-welcomeOffers:"",
-publishedBy:"",
-publishedAt:"",
-payouts:"",
-seoPhoto:"",
-seoTitle:"",
-seoDescription:"",
-seoKeywords:"",
-          });
-        } else {
-          alert(response.data.message || ' Failed to add card. Please try again.');
-        }
-    
-      } catch (error) {
-        console.error('Error adding card:', error);
-    
-        if (error.response) {
-         
-          alert(` Server Error: ${error.response.data.message || 'Something went wrong on the server.'}`);
-        } else if (error.request) {
-                   alert(' Network Error: No response received from server. Please check your internet or server.');
-        } else {
-                  alert(` Unexpected Error: ${error.message}`);
-        }
-      }
-    };
+
         
     // useEffect(()=>{
     //   setForm()
@@ -171,43 +108,8 @@ seoKeywords:"",
     <div className='flex overflow-x-hidden'>
       
   
-      <aside className={`bg-gray-50 border-r border-gray-200 transition-all duration-300 ease-in-out h-screen ${hide ? 'w-64' : 'w-0 overflow-hidden'}`}>
-        <div className="p-6">
-          <h2 className="text-lg font-semibold text-gray-800 mb-6">Steps</h2>
-          
-          {/* Vertical Step Indicator */}
-          <div className="space-y-4">
-            {[
-              { step: 1, title: 'Offer Information' },
-              { step: 2, title: 'Criteria' },
-              { step: 3, title: 'Description' },
-              { step: 4, title: 'SEO Details' },
-              { step: 5, title: 'Review' }
-            ].map((item) => (
-              <div 
-                key={item.step}
-                onClick={() => setCurrentStep(item.step)}
-                className={`flex items-start cursor-pointer p-3 rounded-lg transition-colors
-                  ${currentStep === item.step ? 'bg-blue-50 border-l-4 border-blue-500' : 'hover:bg-gray-100'}`}
-              >
-                <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mr-3 mt-0.5
-                  ${currentStep === item.step ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-600'}
-                  ${currentStep > item.step ? 'bg-green-500 text-white' : ''}`}>
-                  {currentStep > item.step ? (
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                    </svg>
-                  ) : (
-                    item.step
-                  )}
-                </div>
-                <span className={`font-medium ${currentStep === item.step ? 'text-blue-600' : 'text-gray-600'}`}>
-                  {item.title}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
+      <aside className={`bg-red-500 transition-all duration-300 ease-in-out h-screen ${hide ? 'w-60': 'w-0 overflow-hidden'}`}>
+  <h1>hello</h1>
       </aside>
           <button onClick={previous}>P</button>
      
@@ -886,8 +788,14 @@ seoKeywords:"",
     )}
   </div>
 </div>
-      </div>
-              </form>
+
+           
+                        
+                                      
+                           </div>
+                    
+                    
+                         </form>
                          <div className='flex w-full items-center justify-end mt-3 mb-6 gap-6 mt-12'>
                          <button className='text-center  text-white font-semibold p-3 w-60 rounded-md bg-green-400 ' onClick={previous}>previous</button>
                          <button className='text-center  text-white font-semibold p-3 w-60 rounded-md bg-cyan-400 ' onClick={next}>Next</button>
@@ -896,158 +804,28 @@ seoKeywords:"",
                        </div>
                      </div>
           )}
-       {currentStep === 5 && (
-        <div className='w-full'>
-             <div className='flex gap-12 mb-6'>
-                        <button className='text-3xl ' onClick={toggle}>{hide ?<MdOutlineMenuOpen/> :<HiViewList/>}</button>
-                        <h1 className='text-xl font-semibold'>Criteria</h1>
-                     
-                        </div>
-      
-  <div className="space-y-8 p-7">
-    {/* Two-column section */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {/* Card Information */}
-      <div className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-xl font-semibold mb-4 text-gray-800 border-b pb-2">Card Information</h2>
-        <p className="text-gray-500 mb-4">Please check out given information</p>
-        
-        <div className="space-y-3">
-          <div className="flex justify-between">
-            <span className="text-gray-600">Category Name:</span>
-            <span className="font-medium">{form.categoryName || "N/A"}</span>
+          {currentStep===5&&(
+          <div>
+            <h1>{form.cardName || "no data"}</h1>
+            <h1>{form.cardSlung || "no data"}</h1>
+            <h1>{form.joiningFee || "no data"}</h1>
+            <h1>{form.annualFee || "no data"}</h1>
+            <div className="flex">
+  {[...Array(5)].map((_, index) => (
+    <span
+      key={index}
+      className={`text-2xl ${index < form.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+    >
+      ★
+    </span>
+  ))}
+</div>
+            <button className='p-3 border ' onClick={update}>update</button>
           </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Provider Name:</span>
-            <span className="font-medium">{form.providerName || "N/A"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Payment Network Name:</span>
-            <span className="font-medium">{form.service || "N/A"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Credit Card Name:</span>
-            <span className="font-medium">{form.cardName || "N/A"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Credit Card Status:</span>
-            <span className="font-medium">{form.cardStatus ? "Active" : "Inactive"}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Criteria */}
-      <div className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-xl font-semibold mb-4 text-gray-800 border-b pb-2">Criteria</h2>
-        <p className="text-gray-500 mb-4">Please check out given information</p>
-        
-        <div className="space-y-3">
-          <div className="flex justify-between">
-            <span className="text-gray-600">Annual Fee:</span>
-            <span className="font-medium">{form.annualFee || "N/A"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Joining Fee:</span>
-            <span className="font-medium">{form.joiningFee || "N/A"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Annual Percentage Rate:</span>
-            <span className="font-medium">{form.annualPersentageRate || "N/A"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Credit Score min:</span>
-            <span className="font-medium">{form.minCreditScore || "N/A"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Credit Score max:</span>
-            <span className="font-medium">{form.maxCreditScore || "N/A"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">User Age Group min:</span>
-            <span className="font-medium">{form.minAge || "N/A"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">User Age Group max:</span>
-            <span className="font-medium">{form.maxAge || "N/A"}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {/* Description Section */}
-    <div className="bg-white p-6 rounded-lg shadow">
-      <div className="flex items-center mb-4">
-        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-2">
-          <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h2 className="text-xl font-semibold text-gray-800">Description</h2>
-      </div>
-      <p className="text-gray-500 mb-4">Please check out given information</p>
-      
-      <div className="space-y-4">
-        <div>
-          <h3 className="font-medium text-gray-700 mb-1">Features:</h3>
-          <p className="text-gray-600">{form.features || "No features provided"}</p>
-        </div>
-        <div>
-          <h3 className="font-medium text-gray-700 mb-1">Welcome Offers:</h3>
-          <p className="text-gray-600">{form.welcomeOffers || "No welcome offers provided"}</p>
-        </div>
-      </div>
-    </div>
-
-    {/* SEO Information Section */}
-    <div className="bg-white p-6 rounded-lg shadow">
-      <div className="flex items-center mb-4">
-        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-2">
-          <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h2 className="text-xl font-semibold text-gray-800">SEO Information</h2>
-      </div>
-      <p className="text-gray-500 mb-4">Please check out given information</p>
-      
-      <div className="space-y-4">
-        <div>
-          <h3 className="font-medium text-gray-700 mb-1">SEO Title:</h3>
-          <p className="text-gray-600">{form.seoTitle || "No SEO title provided"}</p>
-        </div>
-        <div>
-          <h3 className="font-medium text-gray-700 mb-1">SEO Keywords:</h3>
-          <p className="text-gray-600">{form.seoKeywords || "No SEO keywords provided"}</p>
-        </div>
-        <div>
-          <h3 className="font-medium text-gray-700 mb-1">SEO Description:</h3>
-          <p className="text-gray-600">{form.seoDescription || "No SEO description provided"}</p>
-        </div>
-      </div>
-    </div>
-
- 
-    <div className="flex justify-end gap-6">
-    <button 
-        onClick={previous}
-        className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-      >
-        Pravious
-      </button>
-      <button 
-        onClick={add}
-        className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-      >
-        Submit
-      </button>
-    </div>
-  </div>
-  </div>
-)}
+          )}
           {/* <button onClick={next}>N</button> */}
     </div>
-    
   )
 }
 
-export default MultyStep
+export default MultyStepEdit
