@@ -1,0 +1,45 @@
+import mongoose from "mongoose";
+
+const cardSchema=new mongoose.Schema({
+    cardName:{type:String},
+    cardSlung:{type:String},
+    annualFee:{type:String},
+    joiningFee:{type:String},
+    cardPhoto: { type:String ,required:true},
+    cardType:{type:String},
+    categoryName:{type:String},
+    providerName:{type:String},
+    joiningFee:{type:String},
+    service:{type:String},
+    payout:{type:String},
+    commission:{type:String},
+    cardLink:{type:String},
+    cardStatus:{type:String},
+    rating:{type:String},
+    reviewHeading:{type:String},
+    ratingDescription:{type:String},
+    forignTransactionPlanning:{type:String},
+    annualPersentageRate:{type:String},
+    minCreditScore:{type:String},
+    maxCreditScore:{type:String},
+    maxAge:{type:String},
+    minAge:{type:String},
+    minAge:{type:String},
+    minMonthlyIncome:{type:String},
+    maxMonthlyIncome:{type:String},
+    loungeService:{type:String},
+    fraudLiability:{type:String},
+    features:{type:String},
+    welcomeOffers:{type:String},
+    publishedAt:{type:String},
+    publishedBy:{type:String},
+    payouts:{type:String},
+    seoPhoto:{type:String},
+    seoTitle:{type:String},
+    seoKeywords:{type:String},
+    seoDescription:{type:String},
+
+    
+})
+
+export default mongoose.model.Cards || mongoose.model("Cards",cardSchema)
