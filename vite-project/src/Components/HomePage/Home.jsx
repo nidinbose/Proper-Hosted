@@ -3,7 +3,7 @@ import Landing from './HomeCompoents/Landing'
 
 const Home = () => {
   return (
-    <div>
+    <div className='bg-gray-100'>
         <Landing/>
     </div>
   )
