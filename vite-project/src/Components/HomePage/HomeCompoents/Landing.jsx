@@ -12,11 +12,6 @@ import axios from 'axios';
     "How much time does it take?",
     "What is the cost?",
   ];
-const mark=[{name:"Axis Bank Club Vistara Credit Card" ,image:"./Images/C.jpg" ,bg:"red-500",subhead:"Traval",description:"Elevate your travel experience with the Axis Bank Club Vistara Credit Card, offering exclusive Vistara airline privileges and accelerated rewards on every journey. Seamlessly blend luxury and convenience with a card designed for thediscerning traveler.",rating:"hidden",Annualfee:"500",Joiningfee:"No cost",Creditscore:"hidden",features:"good"},
-  {name:"Axis Bank Club Vistara Credit Card" ,image:"./Images/C.jpg" ,bg:"red-500",subhead:"Traval",description:"Elevate your travel experience with the Axis Bank Club Vistara Credit Card, offering exclusive Vistara airline privileges and accelerated rewards on every journey. Seamlessly blend luxury and convenience with a card designed for thediscerning traveler.",rating:"hidden",Annualfee:"hidden",Joiningfee:"hidden",Creditscore:"hidden"},
-  {name:"Axis Bank Club Vistara Credit Card" ,image:"./Images/C.jpg" ,bg:"red-500",subhead:"Traval",description:"Elevate your travel experience with the Axis Bank Club Vistara Credit Card, offering exclusive Vistara airline privileges and accelerated rewards on every journey. Seamlessly blend luxury and convenience with a card designed for thediscerning traveler.",rating:"hidden",Annualfee:"hidden",Joiningfee:"hidden",Creditscore:"hidden"},
-  {name:"Axis Bank Club Vistara Credit Card" ,image:"./Images/C.jpg" ,bg:"red-500",subhead:"Traval",description:"Elevate your travel experience with the Axis Bank Club Vistara Credit Card, offering exclusive Vistara airline privileges and accelerated rewards on every journey. Seamlessly blend luxury and convenience with a card designed for thediscerning traveler.",rating:"hidden",Annualfee:"hidden",Joiningfee:"hidden",Creditscore:"hidden"},
-]
 
 const Landing = () => {
 
@@ -75,7 +70,7 @@ const Landing = () => {
        
          <div className='grid grid-cols-1 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-12 gap-6 p-7 xl:p-0'>
             
-         <div className="bg-white shadow-md md:col-span-2 lg:col-span-2 xl:col-span-3  rounded-xl p-4">
+         <div className="bg-white shadow-md md:col-span-2 lg:col-span-2 xl:col-span-3 md:h-1/3 lg:h-1/2   rounded-xl p-4">
       {/* Filters Title */}
       <h2 className="text-lg font-bold text-blue-900 mb-4">Filters</h2>
       <hr className="border-gray-300 mb-4" />
