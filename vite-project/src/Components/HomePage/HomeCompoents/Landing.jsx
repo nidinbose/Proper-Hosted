@@ -41,7 +41,7 @@ const Landing = () => {
   const toggleMoreProviders = () => setMoreProviders(!moreProviders);
   return (
     <div>
-        <div className='container mx-auto bg-gray-100'>
+        <div className='container mx-auto bg-gray-100 mt-3'>
      {/* icons */}
           <div className='flex items-center justify-start gap-5 text-indigo-900 p-6 xl:p-0'>
             <div className='flex items-center gap-4 text-xl md:text-2xl'>
